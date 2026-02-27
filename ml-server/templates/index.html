@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Toxicity Risk Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    
+<div class="container">
+    <h1>🛡 Toxicity Risk Detection</h1>
+    <p class="subtitle">AI-powered social media risk analysis</p>
+
+    <textarea id="textInput" placeholder="Enter your text here..."></textarea>
+
+    <button onclick="analyzeText()">Analyze</button>
+
+    <div id="result" class="hidden">
+        <h2>Prediction Result</h2>
+        <p id="label"></p>
+        <p id="confidence"></p>
+
+        <div class="bar-container">
+            <div class="bar" id="lowBar"></div>
+            <div class="bar" id="mediumBar"></div>
+            <div class="bar" id="highBar"></div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

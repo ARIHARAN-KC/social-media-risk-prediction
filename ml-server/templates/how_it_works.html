@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works · AI Risk Prediction</title>
+    <!-- Font Awesome 6 (free) for crisp icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at 70% 10%, #1e2645, #0b0f1f 90%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+        }
+
+        /* main glass container — larger for steps */
+        .container {
+            background: rgba(18, 26, 45, 0.75);
+            backdrop-filter: blur(16px) saturate(200%);
+            -webkit-backdrop-filter: blur(16px) saturate(200%);
+            border: 1px solid rgba(90, 140, 255, 0.25);
+            box-shadow: 0 30px 60px -15px #020617, inset 0 1px 2px rgba(255, 255, 255, 0.08);
+            padding: 3rem 2.8rem;
+            max-width: 900px;
+            width: 100%;
+            border-radius: 4rem 2.5rem 4rem 2.5rem;
+            transition: all 0.2s;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            background: linear-gradient(145deg, #f0f3ff, #b7cdff, #a3b9ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2.2rem;
+            border-bottom: 2px dashed #33447c;
+            padding-bottom: 1rem;
+        }
+
+        h1 i {
+            background: rgba(40, 70, 150, 0.6);
+            padding: 0.6rem;
+            border-radius: 60px;
+            font-size: 2.5rem;
+            color: #b7d0ff;
+            box-shadow: 0 8px 18px #030613;
+        }
+
+        /* card design — each step as a glossy, elevated tile */
+        .card {
+            background: rgba(8, 16, 34, 0.6);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(110, 165, 255, 0.2);
+            border-radius: 3rem 2rem 3rem 2rem;
+            padding: 1.8rem 2.2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 35px -12px #020617, inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px) scale(1.01);
+            border-color: rgba(70, 140, 255, 0.5);
+            box-shadow: 0 30px 45px -12px #08102b, 0 0 0 2px rgba(90, 160, 255, 0.15) inset;
+        }
+
+        .card h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: linear-gradient(145deg, #ffd966, #ffb347);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+
+        .card h3 i {
+            font-size: 2rem;
+            color: #ffbc6e;
+            filter: drop-shadow(0 2px 5px #b45f06);
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 60px;
+            padding: 0.3rem;
+        }
+
+        .card p {
+            color: #ccdeff;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+            font-weight: 300;
+        }
+
+        .card ul {
+            margin-left: 1.8rem;
+            color: #b0caf5;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            list-style-type: none;
+        }
+
+        .card li {
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .card li i {
+            color: #fbbe4c;
+            font-size: 1.2rem;
+            width: 1.8rem;
+            text-align: center;
+        }
+
+        .card li b {
+            color: #fff1b5;
+            font-weight: 600;
+        }
+
+        /* subtle divergence for last card */
+        .card:last-of-type {
+            margin-bottom: 2.8rem;
+        }
+
+        /* back button — stylish, matches main prediction button */
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            background: linear-gradient(145deg, #1f3a9c, #13206b);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.3rem;
+            padding: 1.1rem 2.5rem;
+            border-radius: 60px;
+            width: fit-content;
+            margin: 1rem auto 0;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 30px -8px #0b124b, 0 5px 0 0 #0d1966 inset, 0 -3px 10px rgba(255, 255, 255, 0.3) inset;
+            transition: 0.15s;
+            letter-spacing: 0.8px;
+        }
+
+        .nav-btn i {
+            font-size: 1.6rem;
+            filter: drop-shadow(0 2px 2px black);
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(145deg, #2749c4, #1a2f96);
+            transform: scale(1.02) translateY(-3px);
+            box-shadow: 0 28px 40px -8px #1a237e, 0 5px 0 0 #142184 inset, 0 -3px 12px white inset;
+        }
+
+        .nav-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 12px 25px -5px #0f1952, 0 2px 0 0 #142184 inset;
+        }
+
+        /* small extra details */
+        .footnote {
+            text-align: center;
+            margin-top: 2rem;
+            color: #5b74aa;
+            font-size: 0.95rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            border-top: 1px solid #1f3162;
+            padding-top: 1.5rem;
+        }
+
+        .footnote i {
+            color: #ffbc6e;
+        }
+
+        /* responsiveness */
+        @media (max-width: 600px) {
+            .container { padding: 2rem 1.5rem; }
+            h1 { font-size: 2rem; flex-wrap: wrap; }
+            .card h3 { font-size: 1.7rem; }
+            .card p { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>
+        <i class="fas fa-cogs"></i> 
+        How The System Works
+    </h1>
+
+    <!-- STEP 1 -->
+    <div class="card">
+        <h3><i class="fas fa-database"></i> 1️⃣ Data Collection</h3>
+        <p>
+            Social media text data is gathered and structured to understand
+            behavioral trends associated with potential online risks.
+        </p>
+        <ul>
+            <li><i class="fas fa-check-circle"></i> Multi‑platform aggregation (anonymized)</li>
+            <li><i class="fas fa-chart-line"></i> Temporal & demographic context</li>
+        </ul>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="card">
+        <h3><i class="fas fa-broom"></i> 2️⃣ Text Preprocessing</h3>
+        <p>
+            The system removes noise such as special characters, URLs,
+            stopwords, and applies lemmatization to standardize text.
+        </p>
+        <ul>
+            <li><i class="fas fa-code"></i> Regex‑based cleaning · emoji translation</li>
+            <li><i class="fas fa-language"></i> Lemmatization (WordNet, spaCy)</li>
+        </ul>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="card">
+        <h3><i class="fas fa-chart-bar"></i> 3️⃣ Feature Engineering</h3>
+        <p>
+            The cleaned text is transformed into numerical features using:
+        </p>
+        <ul>
+            <li><i class="fas fa-wordpress"></i> <b>Word‑level TF‑IDF</b> (unigrams + bigrams)</li>
+            <li><i class="fas fa-font"></i> <b>Character n‑grams</b> (length 3–6)</li>
+            <li><i class="fas fa-smile"></i> <b>Sentiment score</b> (VADER / TextBlob)</li>
+            <li><i class="fas fa-exclamation-triangle"></i> toxicity lexicon features</li>
+        </ul>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="card">
+        <h3><i class="fas fa-brain"></i> 4️⃣ Risk Classification</h3>
+        <p>
+            An <b>XGBoost multi‑class model</b> predicts:
+        </p>
+        <ul>
+            <li><i class="fas fa-shield" style="color: #6cdb9f;"></i> <b>Low Risk</b> – safe / neutral</li>
+            <li><i class="fas fa-cloud-sun" style="color: #fbde7e;"></i> <b>Medium Risk</b> – flagged for review</li>
+            <li><i class="fas fa-skull" style="color: #ff8a8a;"></i> <b>High Risk</b> – toxic / harmful</li>
+        </ul>
+        <p style="margin-top: 0.5rem; font-size: 1.1rem;">🔍 Calibrated with focal loss for imbalanced data.</p>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="card">
+        <h3><i class="fas fa-tv"></i> 5️⃣ Real‑Time Visualization</h3>
+        <p>
+            The predicted risk level and probability distribution
+            are displayed instantly for monitoring and awareness.
+        </p>
+        <ul>
+            <li><i class="fas fa-chart-pie"></i> Confidence bars (low/med/high)</li>
+            <li><i class="fas fa-bolt"></i> < 300ms inference (GPU‑optimized)</li>
+            <li><i class="fas fa-history"></i> Audit trail & explainability hooks</li>
+        </ul>
+    </div>
+
+    <!-- elegant back button (exactly matching main page style) -->
+    <a href="/" class="nav-btn">
+        <i class="fas fa-arrow-left"></i> Back to Prediction
+    </a>
+
+    <!-- subtle footnote / version info -->
+    <div class="footnote">
+        <i class="fas fa-shield-halos"></i> AI risk engine v2.0 · XGBoost + transformer embeddings
+        <i class="fas fa-microchip"></i>
+    </div>
+
+</div>
+
+</body>
+</html>
